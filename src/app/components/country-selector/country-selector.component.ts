@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-country-selector',
   templateUrl: './country-selector.component.html',
-  styleUrls: ['./country-selector.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./country-selector.component.css']
 })
 export class CountrySelectorComponent {
 

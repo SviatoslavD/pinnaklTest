@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <!-- Info labels -->
+  <div class="labels-wrapper">
+    <h2 [style.color]="'#007bff'">Total countries in response: {{countriesSubjectAmount | async}} </h2>
+    <h2 [style.color]="'#007bff'">Selected countries: {{selectedCountriesSubjectAmount | async}}</h2>
+    <h2 [style.color]="'#4ac5e8'">Total loaded cities: {{countrySelectService.loadedCitiesSubjectAmount | async}}</h2>
+    <h2 [style.color]="'#4ac5e8'">Cities available to select: {{cities.length}}</h2>
+    <h2 [style.color]="'#4ac5e8'">Selected cities: {{selectedCities.length}}</h2>
+  </div>
+
+  <div class="select-wrapper">
+    <!--  Countries selector  -->
+    <mat-form-field>
+      <mat-label>
+        <span *ngIf="!citiesLoading">Countries</span>
+        <div *ngIf="citiesLoading">
+          <span>City loading...</span>
+          <div [style.display]="'inline-block'"><mat-spinner class="spinner" diameter="20"></mat-spinner></div>
+        </div>
+      </mat-label>
+      <mat-select [formControl]="countriesControl" (openedChange)="countrySelectOpened($event)" multiple>
+        <ng-container *ngIf="!loading">
+          <mat-option *ngFor="let country of countries" [value]="country" [disabled]="country?.disabled || citiesLoading">
+            {{country.name}}
+          </mat-option>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-option disabled>
+            <span>Loading...</span>
+            <mat-spinner class="spinner" diameter="20"></mat-spinner>
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <!--  Cities selector  -->
+    <mat-form-field>
+      <mat-label>
+        <span *ngIf="!citiesLoading">Cities</span>
+        <div *ngIf="citiesLoading">
+          <span>Loading...</span>
+          <div [style.display]="'inline-block'"><mat-spinner class="spinner" diameter="20"></mat-spinner></div>
+        </div>
+      </mat-label>
+      <mat-select [formControl]="citiesControl" [disabled]="!selectedCountries.length" multiple>
+        <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

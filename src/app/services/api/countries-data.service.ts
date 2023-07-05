@@ -7,7 +7,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CountryHttpResponseInterface } from '../../models/countryHttpResponse.interface';
 import { CitiesHttpResponseInterface } from '../../models/citiesHttpResponse.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CountriesDataService {
 
   private apiUrl: string = 'https://countriesnow.space/api/v0.1/countries';
